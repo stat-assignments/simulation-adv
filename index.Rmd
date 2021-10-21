@@ -6,13 +6,15 @@ output: html_document
 
 ## Instructions
 
-**Spend no more than 4 hours on this assignment, total.**
+**Spend no more than 4 hours on writing pseudocode for this assignment**
 
 Read the assignment from start to finish - the simulation design will affect your functions.
 
 Work through this assignment in detailed pseudo-code first. See the hearts.Rmd file for an example. - Put your pseudo-code (or list of steps) in \`\`\` blocks with no {} (this is a generic markup chunk).
 
-Then, *if you have time*, implement the game in R and simulate your question. If your simulation runs, you can get up to 5 bonus points on this assignment.
+Then, *if you have time*, implement the game in R and simulate your question.
+
+You will have an opportunity to submit a link to this assignment with working code for an extra (bonus) homework assignment one week after this assignment is due.
 
 When you are finished with the assignment:
 
