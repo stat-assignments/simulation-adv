@@ -1,31 +1,80 @@
 ---
-title: "Homework: Simulation"
+title: "Homework 11: Simulation"
 author: "Example: Hearts"
 output: html_document
 ---
 
+```{r setup, include = F}
+# Don't include this chunk in the write-up, but run it anyways
+library(tidyverse)
+```
+
 ## Is it in the cards?
 
-In this task, you will create a simulation of a card game played with a standard deck of 52 cards. You might consider games such as [blackjack](https://bicyclecards.com/how-to-play/blackjack/#filter), [war](https://bicyclecards.com/how-to-play/war/#filter), or [go fish](https://bicyclecards.com/how-to-play/go-fish/#filter). You may choose any game that can be assessed probabilistically -- you may want to avoid games which require a large amount of strategy, skill, and bluffing, such as poker.
+In this task, you will create a simulation of Hearts, a card game which is played with 52 cards.
+
+You may also work with a different game if you get approval from me before you start. You may want to avoid games which require a large amount of strategy, skill, and bluffing, such as poker.
 
 This homework file is set up to demonstrate how this would be done with the game of [hearts](https://bicyclecards.com/how-to-play/hearts/#filter).
 
-You don't need to necessarily simulate the full game mechanism, but you do need to implement enough of the game mechanism that you can identify an interesting probability question in your game and answer the question using a simulation.
+You don't need to necessarily simulate the full game mechanism, but you do need to implement enough of the game mechanism that you can identify an interesting probability question and answer the question using a simulation.
+
+### Identify a Question
+
+::: callout-note
+
+Guidelines:
+
+- Your question should be something that is not easily answerable with obviously constructed probability calculations.
+
+- Some options include: 
+      - Compute the probability of going bust given that you have N cards in your hand. (You can ignore the rules about splitting your hand if you get two cards of the same denomination)
+      - Compute the probability of going bust given that your original two cards total 9, 10, or 11 (doubling down)
+      - Compare the probability of going bust with N cards in your hand if one of the cards you were originally dealt was an Ace (which can count as 1 or 11) vs. if you know that you do not have an Ace. 
+      - Evaluate two competing strategies for Blackjack to see which one has a higher success probability.
+      - Compare strategies for Blackjack with strategies for a similar card game (31), in which the player only goes bust when the cards total more than 31. 
+
+You are not limited to the options above, but your question must be complex enough that it would require a simulation of the game's mechanics beyond the initial shuffle.
+
+:::
+
+Before I explain my question, a quick story:
+
+When my parents taught us hearts (I was about 11, my sister would have been 9), the first time we played they taught us simplified rules:
+
+- try to get the fewest hearts
+- the person with the most hearts gets the highest score (low is good)
+- try to avoid the queen of spades, because that's 13 points. 
+
+They didn't mention the fact that if you got all the hearts and the queen of spades, you "shot the moon" and scored 0, and everyone else got 26 points. During that first game, I was trying as hard as I could, and I kept getting hearts! By the end of the round, I was trying very hard not to cry, only to find out that I'd shot the moon and everyone else got all of the points - I was in the lead! It was a very confusing game.
+
+Fundamentally, my question is: What is the probability that a player using relatively little (no) strategy accidentally "shoots the moon" in a game of hearts?
+
 
 ### Set up your objects
 
-First, you must set up a data frame describing all possible values of your playing items. For instance, if you are using a standard deck of 52 playing cards, you'll need a data frame which has columns for suit and value, and you may want to make value a factor variable (your call on that one). If your game requires that players hold cards in their hand, you may also want to have a column indicating location (deck, discard, player_x).
+::: callout-caution
+Think very carefully about how you want to set up your simulation. It is almost always easier to describe the position of all of the cards in the deck using a single data frame than it is to maintain separate data frames of multiple cards for each player and for the discard pile and undealt cards.
+:::
+
+First, you must set up a data frame describing all possible values of your playing items. A standard deck of 52 playing cards might be described using a data frame which has columns for suit and value, and you may want to make value a factor variable (your call on that one). If your game requires that players hold cards in their hand, you may also want to have a column indicating location (deck, discard, player_x).
+
+
+#### Pseudocode: Set up
+<!-- Note that indenting text with 4 spaces prints it out like code, but doesn't require anything to execute (so it doesn't have to be real code).  -->
 
     Pseudocode: Set up objects
 
-    Create a tibble with 4 suits and 13 values labeled Ace, 2:10, J, Q, K
+    Create a tibble with 4 suits and 13 values labeled 
+        Ace, 2:10, J, Q, K
     Add point values
     Add card ID numbers
     (Eventually) add location column - defer to a later step
     Remove any cards from the deck not necessary for game play
 
+#### Functions: Set up
+
 ```{r}
-library(tidyverse)
 create_deck <- function() {
   # Set up cards
   suits <- c("hearts", "diamonds", "spades", "clubs")
@@ -75,11 +124,15 @@ create_deck() %>%
   arrange(value, suit)
 ```
 
-### Write one or more functions to simulate the basic game mechanisms
+### Write Pseudocode to describe how your game will be played
 
-For instance, if you are simulating a game where all cards are initially held by players, you need to have a function that randomly assigns 13 cards to each player. You may also want a function that controls the game play and functions for each separate step in game play (some of these functions may need to be called using a loop).
+::: callout-caution
+Note that this pseudocode should be written focused on how you will record the game's progression in a computer simulation. It's relatively easy to write pseudo"code" to describe the instructions for playing the game, but it's entirely a different thing to write pseudocode for how to simulate gameplay computationally.
 
-    Pseudocode:
+See [hearts.qmd](hearts.qmd) for an example of the level of detail I'm looking for here.
+:::
+
+<!-- Note that indenting text with 4 spaces prints it out like code, but doesn't require anything to execute (so it doesn't have to be real code).  -->
 
     Full game: 
     1. Deal Cards
@@ -102,6 +155,16 @@ For instance, if you are simulating a game where all cards are initially held by
             - if not, check if other cards are available
                 - if other cards are available, remove all hearts from the "options"
             - return available cards data frame
+
+### Write one or more functions to simulate the basic game mechanisms
+
+<!-- Delete this commentary and replace it with your own planning about how to simulate your game. -->
+
+<!-- If you are simulating a game where all cards are initially held by players, you need to have a function that randomly assigns 13 cards to each player.  -->
+
+<!-- You may want a function that controls the game play and functions for each separate step in game play (some of these functions may need to be called using a loop). -->
+
+<!-- In Blackjack, I would expect that you would have a function for the initial deal, a function to determine what logic should be used under each condition, and a scoring function, at minimum. -->
 
 #### Deal cards to players
 
@@ -126,7 +189,9 @@ create_deck() %>%
 
 #### Picking Cards
 
-Next, we need to handle how a player would select a card. We're going to ignore any sort of logic that would depend on cards played by previous players in the same trick (or previous tricks). Remember, I'm simulating my siblings and I playing this game when I was at most 11 (and I was the oldest), so it's a 100% safe assumption that our logical skills were ... suboptimal.
+Next, we need to handle how a player would select a card. We're going to ignore any sort of logic that would depend on cards played by previous players in the same trick (or previous tricks). 
+
+I'm simulating my siblings and I playing this game when I was at most 11 (and I was the oldest), so it's a 100% safe assumption that our logical skills were ... sub optimal.
 
 In Hearts, like in many other trick-based games, you have certain rules that must be followed, like matching suits.
 
@@ -135,8 +200,13 @@ In Hearts, like in many other trick-based games, you have certain rules that mus
 # Check whether there's a card in the selected suit
 pick_card_in_suit <- function(cards, sel_suit = NA) {
   # if sel_suit is NA, this will return nothing
-  filter(cards, suit == sel_suit) %>%
-    slice_sample(n = 1)
+  valid <- filter(cards, suit == sel_suit) 
+  
+  if (nrow(valid) > 0) {
+    slice_sample(valid, n = 1)
+  } else {
+    valid
+  }
 }
 
 ```
@@ -203,6 +273,8 @@ To make this function a bit easier to use, I've created a couple of helper funct
 ```{r}
 # Evaluate a played trick, adding columns for trick_order, in_suit, player_win, and trick number
 eval_trick <- function(cards, spec_suit, trick_num = NA) {
+  # Note that trick order is likely to be wrong for the first trick,
+  # but this isn't critical - it just helps keep track of things.
   cards %>%
     mutate(trick_order = 1:n()) %>%
     mutate(in_suit = suit == spec_suit) %>%
@@ -254,16 +326,16 @@ first_trick <- function(dealt) {
 
 #### General trick
 
-The same basic logic applies in any trick - the first card is picked, and then all other players throw in a card. We do need a hearts_playable function that will evaluate our deck to see if hearts is an option; once we have that, we can write a general trick-playing function.
-
-Notice that we're calling the first_trick function within this function - this makes it much easier to remember the syntax.
-
+The same basic logic applies in any trick - the first card is picked, and then all other players throw in a card. We do need a `hearts_playable` function that will evaluate our deck to see if hearts is an option; once we have that, we can write a general trick-playing function.
 ```{r}
-
 hearts_playable <- function(df) {
   sum(df$points, na.rm = T) > 0
 }
+```
 
+Notice that we're calling the `first_trick` function within the more general `play_trick` function - this makes it much easier to remember the syntax.
+
+```{r}
 play_trick <- function(dealt) {
   if (!"trick" %in% names(dealt)) {
     return(first_trick(dealt))
@@ -368,11 +440,7 @@ hearts(c("Amy", "Beth", "Cara", "Dawn")) %>%
   calc_score()
 ```
 
-### Identify a probability question you can answer with your simulation
-
-For instance, if you are simulating blackjack, you may want to know what the [expected return on a specific strategy is](https://towardsdatascience.com/python-blackjack-simulator-61b591ffb971) (hint: if you're beating the dealer, your simulation is probably wrong).
-
-Fundamentally, my question is what the probability is that a player using relatively little strategy accidentally "shoots the moon".
+#### Did the player shoot the moon?
 
 In a shoot the moon scenario, the total game points will be (n-1) times normal, where $n$ is the number of players. This function returns a logical indicator of whether or not the total number of points generated is more than 26 (indicating that someone shot the moon)
 
@@ -382,11 +450,12 @@ shoot_the_moon <- function(data) {
 }
 ```
 
-### Design a simulation to answer the question you identified
 
-Run your simulation with an increasing number of iterations and create some sort of plot showing your results.
+### Use your functions to simulate a game and evaluate your question
 
-Describe any issues you encountered in your simulation, and how you addressed them (or where the whole thing went off the rails, if you couldn't address everything in time).
+<!-- Run your simulation with an increasing number of iterations and create some sort of plot showing your results. -->
+
+<!-- Describe any issues you encountered in your simulation, and how you addressed them (or where the whole thing went off the rails, if you couldn't address everything in time). -->
 
 ```{r, eval = F}
 # I'm saving the results of this so that I only 
@@ -415,7 +484,12 @@ res <- tibble(
 
 From this assessment, one player shoots the moon in approximately `r sprintf("%0.2f%%", 100*mean(res$stm > 0))` of games played using the naive strategy. My parents were probably pretty reasonably assuming that they could explain that part of the strategy later, once we'd grasped the fundamentals of the game.
 
-I wish I had time to add in some strategy component, but I think at this point that would be excessive.
+There are a couple of other options to consider - my simulation may not exactly model reality because of the assumption that all players were acting randomly:
+
+- (The most likely) I've simulated 4 players randomly playing hearts, but in the game that motivated the question, my parents actually knew what they were doing. If two players were strategizing, and two players were playing randomly, it might be more likely for someone to end up with all of the high point cards because two of the players were good enough to avoid them; the remaining point cards were randomly distributed. This seems like a more likely scenario to me. 
+- (Less likely) By trying to strategize (and failing) I unintentionally shot the moon - that is, I've simulated randomness, but that's not necessarily accurate - my strategy could have been *worse* than random guessing, making this simulation somewhat useless. 
+
+I wish I had time to add in some strategy component, but I think at this point that would be excessive. While the simulation is a useful benchmark, it doesn't completely describe the whole situation -- which is pretty typical!
 
 Note that we can compute other interesting quantities from our simulated set of games, such as the total proportion of points on the board once there $x$ tricks played.
 

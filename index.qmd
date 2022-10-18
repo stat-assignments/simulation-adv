@@ -1,0 +1,86 @@
+---
+title: "Homework: Simulation"
+author: "Firstname Lastname"
+output: html_document
+---
+
+## Is it in the cards?
+
+In this task, you will create a simulation of Blackjack, a card game which is played with 52 cards.
+
+This homework file is set up to demonstrate how this would be done with the game of [hearts](https://bicyclecards.com/how-to-play/hearts/#filter).
+
+You don't need to necessarily simulate the full game mechanism, but you do need to implement enough of the game mechanism that you can identify an interesting probability question and answer the question using a simulation.
+
+### Identify a Question
+
+::: callout-note
+
+Guidelines:
+
+- Your question should be something that is not easily answerable with obviously constructed probability calculations.
+
+- Some options include: 
+      - Compute the probability of going bust given that you have N cards in your hand. (You can ignore the rules about splitting your hand if you get two cards of the same denomination)
+      - Compute the probability of going bust given that your original two cards total 9, 10, or 11 (doubling down)
+      - Compare the probability of going bust with N cards in your hand if one of the cards you were originally dealt was an Ace (which can count as 1 or 11) vs. if you know that you do not have an Ace. 
+      - Evaluate two competing strategies for Blackjack to see which one has a higher success probability.
+      - Compare strategies for Blackjack with strategies for a similar card game (31), in which the player only goes bust when the cards total more than 31. 
+
+You are not limited to the options above, but your question must be complex enough that it would require a simulation of the game's mechanics beyond the initial shuffle.
+
+:::
+
+### Set up your objects
+
+::: callout-caution
+Think very carefully about how you want to set up your simulation. It is almost always easier to describe the position of all of the cards in the deck using a single data frame than it is to maintain separate data frames of multiple cards for each player and for the discard pile and undealt cards.
+:::
+
+First, you must set up a data frame describing all possible values of your playing items. A standard deck of 52 playing cards might be described using a data frame which has columns for suit and value, and you may want to make value a factor variable (your call on that one). If your game requires that players hold cards in their hand, you may also want to have a column indicating location (deck, discard, player_x).
+
+
+
+Delete this and write out some pseudocode (first) and then functions (after the pseudocode) to set up your deck for gameplay.
+
+#### Pseudocode: Set up
+
+#### Functions: Set up
+
+### Write Pseudocode to describe how your game will be played
+
+::: callout-caution
+Note that this pseudocode should be written focused on how you will record the game's progression in a computer simulation. It's relatively easy to write pseudo"code" to describe the instructions for playing the game, but it's entirely a different thing to write pseudocode for how to simulate gameplay computationally.
+
+See [hearts.qmd](hearts.qmd) for an example of the level of detail I'm looking for here.
+:::
+
+<!-- Note that indenting text with 4 spaces prints it out like code, but doesn't require anything to execute (so it doesn't have to be real code).  -->
+
+
+
+### Write functions to play the game
+
+<!-- Delete this commentary and replace it with your own planning about how to simulate your game. -->
+
+If you are simulating a game where all cards are initially held by players, you need to have a function that randomly assigns 13 cards to each player. 
+
+You may want a function that controls the game play and functions for each separate step in game play (some of these functions may need to be called using a loop).
+
+In Blackjack, I would expect that you would have a function for the initial deal, a function to determine what logic should be used under each condition, and a scoring function, at minimum.
+
+#### Describe the main goal of your function with a header
+
+Your code chunk and any demonstration of the function's use should go here.
+
+#### You should have a couple of sub-headers
+
+Each sub-header should correspond to one or two steps of the pseudocode written above.
+
+
+
+### Use your functions to simulate a game and evaluate your question
+
+Run your simulation with an increasing number of iterations and create one or more plots showing your results.
+
+Describe any issues you encountered in your simulation, and how you addressed them (or where the whole thing went off the rails, if you couldn't address everything in time).
