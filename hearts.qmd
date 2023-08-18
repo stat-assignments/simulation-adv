@@ -11,7 +11,7 @@ library(tidyverse)
 
 ## Is it in the cards?
 
-In this task, you will create a simulation of Hearts, a card game which is played with 52 cards.
+In this task, you will create a simulation of Blackjack, a card game which is played with 52 cards.
 
 You may also work with a different game if you get approval from me before you start. You may want to avoid games which require a large amount of strategy, skill, and bluffing, such as poker.
 
