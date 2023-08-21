@@ -1,6 +1,6 @@
 ---
 title: "Homework 11: Simulation"
-author: "Example: Hearts"
+author: Example
 output: html_document
 ---
 
