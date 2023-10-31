@@ -22,11 +22,11 @@ Guidelines:
 
 - Some options include: 
 
-      - Compute the probability of going bust given that you have N cards in your hand. (You can ignore the rules about splitting your hand if you get two cards of the same denomination)
-      - Compute the probability of going bust given that your original two cards total 9, 10, or 11 (doubling down)
-      - Compare the probability of going bust with N cards in your hand if one of the cards you were originally dealt was an Ace (which can count as 1 or 11) vs. if you know that you do not have an Ace. 
-      - Evaluate two competing strategies for Blackjack to see which one has a higher success probability.
-      - Compare strategies for Blackjack with strategies for a similar card game (31), in which the player only goes bust when the cards total more than 31. 
+  - Compute the probability of going bust given that you have N cards in your hand. (You can ignore the rules about splitting your hand if you get two cards of the same denomination)
+  - Compute the probability of going bust given that your original two cards total 9, 10, or 11 (doubling down)
+  - Compare the probability of going bust with N cards in your hand if one of the cards you were originally dealt was an Ace (which can count as 1 or 11) vs. if you know that you do not have an Ace. 
+  - Evaluate two competing strategies for Blackjack to see which one has a higher success probability.
+  - Compare strategies for Blackjack with strategies for a similar card game (31), in which the player only goes bust when the cards total more than 31. 
 
 You are not limited to the options above, but your question must be complex enough that it would require a simulation of the game's mechanics beyond the initial shuffle.
 
