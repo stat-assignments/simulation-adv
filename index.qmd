@@ -21,6 +21,7 @@ Guidelines:
 - Your question should be something that is not easily answerable with obviously constructed probability calculations.
 
 - Some options include: 
+
       - Compute the probability of going bust given that you have N cards in your hand. (You can ignore the rules about splitting your hand if you get two cards of the same denomination)
       - Compute the probability of going bust given that your original two cards total 9, 10, or 11 (doubling down)
       - Compare the probability of going bust with N cards in your hand if one of the cards you were originally dealt was an Ace (which can count as 1 or 11) vs. if you know that you do not have an Ace. 
