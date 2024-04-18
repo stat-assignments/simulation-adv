@@ -1,6 +1,8 @@
 ---
 title: "Homework: Simulation"
-author: "Firstname Lastname"
+execute:
+  error: true
+author: "Your Name"
 output: html_document
 ---
 
